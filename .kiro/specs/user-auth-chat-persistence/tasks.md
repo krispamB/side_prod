@@ -12,28 +12,28 @@
   - Add authentication state persistence across browser sessions
   - _Requirements: 1.4, 2.3, 5.5_
 
-- [ ] 3. Build authentication UI components
-- [ ] 3.1 Create welcome/landing page for unauthenticated users
+- [x] 3. Build authentication UI components
+- [x] 3.1 Create welcome/landing page for unauthenticated users
   - Design welcome screen with sign-up and sign-in options
   - Implement responsive layout matching current Krismini design
   - Add smooth transitions between auth states
   - _Requirements: 1.1_
 
-- [ ] 3.2 Implement sign-up form component
+- [x] 3.2 Implement sign-up form component
   - Create registration form with email and password fields
   - Add form validation with real-time feedback
   - Integrate with Supabase Auth for account creation
   - Handle registration errors with clear user messaging
   - _Requirements: 1.2, 1.3, 1.5_
 
-- [ ] 3.3 Implement sign-in form component
+- [x] 3.3 Implement sign-in form component
   - Create login form with email and password fields
   - Add form validation and error handling
   - Integrate with Supabase Auth for user authentication
   - Implement "forgot password" functionality
   - _Requirements: 2.1, 2.2, 2.4_
 
-- [ ] 4. Create authentication wrapper and routing
+- [x] 4. Create authentication wrapper and routing
   - Implement AuthWrapper component to manage app-wide auth state
   - Add conditional rendering between auth pages and chat interface
   - Handle automatic redirects based on authentication status
