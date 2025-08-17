@@ -8,13 +8,27 @@
         "--project-ref=xiarvdkwhabjrvzsbokd"
       ],
       "env": {
-        "SUPABASE_ACCESS_TOKEN": "sbp_3d83330503d90b8ebaee32f6f8184a2597087b2e"
+        "SUPABASE_ACCESS_TOKEN": "${SUPABASE_ACCESS_TOKEN}"
       },
       "disabled": false,
       "autoApprove": [
         "list_tables",
         "apply_migration",
         "execute_sql"
+      ]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest"
+      ],
+      "disabled": false,
+      "autoApprove": [
+        "browser_click",
+        "browser_console_messages",
+        "browser_press_key",
+        "browser_wait_for",
+        "browser_navigate"
       ]
     }
   }

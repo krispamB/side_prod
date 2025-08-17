@@ -109,11 +109,25 @@ export default function SignUpForm({ onBackToWelcome, onShowSignIn }: SignUpForm
       return;
     }
 
-    const { error } = await signUp(formData.email, formData.password);
+    try {
+      const { error } = await signUp(formData.email, formData.password);
 
-    if (!error) {
-      // Show confirmation message
-      setShowConfirmation(true);
+      if (!error) {
+        // Show confirmation message
+        setShowConfirmation(true);
+        // Clear form data for security
+        setFormData({
+          email: formData.email, // Keep email for display in confirmation
+          password: '',
+          confirmPassword: ''
+        });
+      }
+    } catch (err) {
+      // Handle unexpected errors
+      console.error('Unexpected sign-up error:', err);
+      setFormErrors({
+        general: 'An unexpected error occurred. Please try again.'
+      });
     }
   };
 
@@ -325,9 +339,31 @@ export default function SignUpForm({ onBackToWelcome, onShowSignIn }: SignUpForm
                 </div>
 
                 {/* Auth error display */}
-                {error && (
+                {(error || formErrors.general) && (
                   <div className="p-4 rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
-                    <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+                    <div className="flex items-start gap-3">
+                      <div className="w-5 h-5 text-red-500 dark:text-red-400 flex-shrink-0 mt-0.5">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h4 className="text-sm font-semibold text-red-800 dark:text-red-200 mb-1">
+                          Sign-up Error
+                        </h4>
+                        <p className="text-sm text-red-700 dark:text-red-300">
+                          {error || formErrors.general}
+                        </p>
+                        {error && error.includes('already exists') && (
+                          <button
+                            onClick={onShowSignIn}
+                            className="mt-2 text-sm text-red-700 dark:text-red-300 hover:text-red-800 dark:hover:text-red-200 underline"
+                          >
+                            Sign in instead
+                          </button>
+                        )}
+                      </div>
+                    </div>
                   </div>
                 )}
 
