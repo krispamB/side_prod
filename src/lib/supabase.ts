@@ -11,6 +11,6 @@ export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
     detectSessionInUrl: true,
     storage: typeof window !== 'undefined' ? window.localStorage : undefined,
     storageKey: 'krismini-auth-token',
-    flowType: 'pkce'
+    flowType: 'implicit'
   }
 })

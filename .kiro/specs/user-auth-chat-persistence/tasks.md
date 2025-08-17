@@ -40,14 +40,14 @@
   - Implement loading states during authentication checks
   - _Requirements: 1.4, 2.3_
 
-- [ ] 5. Extend chat interface with user account features
-- [ ] 5.1 Add user profile display to header
+- [x] 5. Extend chat interface with user account features
+- [x] 5.1 Add user profile display to header
   - Show authenticated user's email in the top navigation
   - Create dropdown menu with account options
   - Style profile area to match existing Krismini design
   - _Requirements: 5.1, 5.2_
 
-- [ ] 5.2 Implement secure sign-out functionality
+- [x] 5.2 Implement secure sign-out functionality
   - Add sign-out button to user profile dropdown
   - Clear user session and cached data on sign-out
   - Redirect to welcome screen after successful sign-out

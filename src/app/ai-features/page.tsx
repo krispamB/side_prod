@@ -2,6 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { ThemeSwitcher } from '../../components/ThemeSwitcher';
+import { UserProfile } from '../../components/UserProfile';
 
 const ReactMarkdown = dynamic(() => import('react-markdown'), { ssr: false });
 
@@ -116,6 +117,7 @@ export default function AIFeaturesPage() {
           </div>
           <div className="flex items-center gap-2 ml-auto">
             <ThemeSwitcher />
+            <UserProfile />
             <button>
               <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="#fff" strokeWidth="2" fill="none"/><path d="M12 8v4" stroke="#fff" strokeWidth="2" strokeLinecap="round"/><circle cx="12" cy="16" r="1" fill="#fff"/></svg>
             </button>

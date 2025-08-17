@@ -23,8 +23,16 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
     );
   }
 
-  // Show error state if there's an authentication error
-  if (error) {
+  // Show error state only for critical authentication errors (not form-level errors)
+  // Form-level errors should be handled by the individual auth forms
+  const isCriticalError = error && (
+    error.includes('session') || 
+    error.includes('network') || 
+    error.includes('server') ||
+    error.includes('connection')
+  );
+
+  if (isCriticalError) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#f5f0fa] dark:bg-[#18181b] transition-colors">
         <div className="flex flex-col items-center gap-4 max-w-md mx-auto px-4">
