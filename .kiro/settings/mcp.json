@@ -1,0 +1,35 @@
+{
+  "mcpServers": {
+    "supabase": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@supabase/mcp-server-supabase@latest",
+        "--project-ref=${SUPABASE_PROJECT_REF}"
+      ],
+      "env": {
+        "SUPABASE_ACCESS_TOKEN": "${SUPABASE_ACCESS_TOKEN}"
+      },
+      "disabled": false,
+      "autoApprove": [
+        "list_tables",
+        "apply_migration",
+        "execute_sql"
+      ]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest"
+      ],
+      "disabled": false,
+      "autoApprove": [
+        "browser_click",
+        "browser_console_messages",
+        "browser_press_key",
+        "browser_wait_for",
+        "browser_navigate"
+      ]
+    }
+  }
+}
