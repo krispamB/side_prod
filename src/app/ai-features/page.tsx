@@ -157,7 +157,7 @@ export default function AIFeaturesPage() {
 
   return (
     <div className="min-h-screen flex bg-[#f5f0fa] dark:bg-[#18181b] transition-colors">
-      {/* Sidebar */}
+      {/* Sidebar - hidden on mobile */}
       <aside className="hidden sm:flex w-16 bg-[#ede6f7] dark:bg-[#23232a] flex-col items-center py-4 border-r border-[#e0d7ee] dark:border-[#23232a] transition-colors">
         <button className="mb-4 p-2 rounded hover:bg-[#e0d7ee] dark:hover:bg-[#23232a]">
           {/* Hamburger icon */}
@@ -170,9 +170,9 @@ export default function AIFeaturesPage() {
       </aside>
 
       {/* Main content area */}
-      <div className="flex-1 flex flex-col min-h-screen w-full">
+      <div className="flex-1 flex flex-col min-h-screen w-full overflow-hidden">
         {/* Top bar */}
-        <header className="w-full bg-[#2d2346] dark:bg-[#23232a] text-white flex items-center px-3 sm:px-6 py-2 justify-between transition-colors">
+        <header className="w-full bg-[#2d2346] dark:bg-[#23232a] text-white flex items-center px-3 sm:px-6 py-2 transition-colors">
           <div className="flex items-center gap-2 font-semibold text-lg">
             <span>
               <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -187,15 +187,22 @@ export default function AIFeaturesPage() {
                 </g>
               </svg>
             </span>
-            Krismini
+            <span className="hidden sm:inline">Krismini</span>
           </div>
-          <div className="flex-1 text-center">
-            <span className="text-xs">Talk to Chris, your very smart and helpful friend <a href="#" className="underline">Chat now</a></span>
+          
+          {/* Mobile-optimized center text */}
+          <div className="flex-1 text-center px-2 sm:px-4">
+            <div className="text-xs sm:text-sm">
+              <span className="hidden sm:inline">Talk to Chris, your very smart and helpful friend </span>
+              <span className="sm:hidden">Talk to Chris, your very smart and helpful friend </span>
+              <a href="#" className="underline whitespace-nowrap">Chat now</a>
+            </div>
           </div>
-          <div className="flex items-center gap-2 ml-auto">
+          
+          <div className="flex items-center gap-1 sm:gap-2">
             <ThemeSwitcher />
             <UserProfile />
-            <button>
+            <button className="hidden sm:block">
               <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="#fff" strokeWidth="2" fill="none"/><path d="M12 8v4" stroke="#fff" strokeWidth="2" strokeLinecap="round"/><circle cx="12" cy="16" r="1" fill="#fff"/></svg>
             </button>
           </div>
@@ -204,7 +211,7 @@ export default function AIFeaturesPage() {
         {/* Chat history */}
         <div
           ref={chatContainerRef}
-          className="flex flex-col w-full max-w-2xl mx-auto mt-2 mb-2 overflow-y-auto flex-1 bg-[#f8f9fa] dark:bg-[#1C1C1E]"
+          className="flex flex-col w-full max-w-2xl mx-auto mt-2 mb-2 overflow-y-auto flex-1 bg-[#f8f9fa] dark:bg-[#1C1C1E] px-2 sm:px-0"
           style={{ paddingBottom: '88px', minHeight: '0' }}
         >
           {/* Load more button/indicator */}
@@ -254,8 +261,8 @@ export default function AIFeaturesPage() {
                 )}
                 
                 {/* Message bubble */}
-                <div className={`w-full flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} px-2 ${isFirstInGroup ? 'mb-1 mt-2' : 'mb-0.5'}`}>
-                  <div className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'} max-w-[85%] sm:max-w-[75%]`}>
+                <div className={`w-full flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} px-1 sm:px-2 ${isFirstInGroup ? 'mb-1 mt-2' : 'mb-0.5'}`}>
+                  <div className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'} max-w-[90%] sm:max-w-[85%] md:max-w-[75%]`}>
                     {/* Message content */}
                     <div className={`rounded-2xl px-3 py-2 sm:px-4 sm:py-3 text-base shadow-sm relative transition-all duration-200 ${
                       msg.role === 'user' 
@@ -359,30 +366,30 @@ export default function AIFeaturesPage() {
 
         {/* Greeting and features only if chat is empty */}
         {messages.length === 0 && !isLoading && (
-          <div className="flex-1 flex flex-col items-center justify-center px-1 sm:px-2 pb-32">
+          <div className="flex-1 flex flex-col items-center justify-center px-3 sm:px-4 pb-32">
             <div className="w-full max-w-5xl">
-              <div className="mb-6 mt-8 sm:mb-8 sm:mt-10">
-                <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-center">
+              <div className="mb-6 mt-4 sm:mb-8 sm:mt-10">
+                <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center px-2">
                   <span className="text-[#5b5fc7] dark:text-[#b5a7d6]">Hello,</span> <span className="text-[#b15b6b] dark:text-[#5b5fc7]">Friend</span>
                 </h1>
-                <h2 className="text-lg sm:text-2xl md:text-3xl text-gray-400 dark:text-gray-300 font-light text-center mt-2">
+                <h2 className="text-base sm:text-xl md:text-2xl lg:text-3xl text-gray-400 dark:text-gray-300 font-light text-center mt-2 px-2">
                   How can I help you today?
                 </h2>
               </div>
-              <div className="flex flex-col gap-4 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-6 justify-center">
+              <div className="flex flex-col gap-3 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-4 lg:gap-6 justify-center px-2">
                 {features.map((feature, idx) => (
                   <div
                     key={idx}
-                    className="bg-[#e7e0ef] dark:bg-[#23232a] rounded-xl shadow-sm p-4 sm:p-6 flex flex-col items-start min-h-[100px] sm:min-h-[120px] hover:shadow-md transition-shadow cursor-pointer border border-transparent dark:border-gray-700 w-full"
+                    className="bg-[#e7e0ef] dark:bg-[#23232a] rounded-xl shadow-sm p-4 sm:p-5 lg:p-6 flex flex-col items-start min-h-[90px] sm:min-h-[100px] lg:min-h-[120px] hover:shadow-md transition-shadow cursor-pointer border border-transparent dark:border-gray-700 w-full active:scale-95 transition-transform"
                     onClick={() => setInput(feature.title)}
                   >
-                    <div className="text-base sm:text-md font-medium text-gray-800 dark:text-gray-100 mb-2">{feature.title}</div>
+                    <div className="text-sm sm:text-base font-medium text-gray-800 dark:text-gray-100 mb-2 leading-tight">{feature.title}</div>
                     {feature.description && (
-                      <div className="text-sm text-gray-500 dark:text-gray-300">{feature.description}</div>
+                      <div className="text-xs sm:text-sm text-gray-500 dark:text-gray-300">{feature.description}</div>
                     )}
                     <div className="mt-auto self-end">
-                      <span className="inline-block w-6 h-6 rounded-full border border-gray-300 dark:border-gray-700 flex items-center justify-center text-gray-400 dark:text-gray-300">
-                        <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="#bbb" strokeWidth="2" fill="none"/><circle cx="12" cy="12" r="2" fill="#bbb"/></svg>
+                      <span className="inline-block w-5 h-5 sm:w-6 sm:h-6 rounded-full border border-gray-300 dark:border-gray-700 flex items-center justify-center text-gray-400 dark:text-gray-300">
+                        <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="#bbb" strokeWidth="2" fill="none"/><circle cx="12" cy="12" r="2" fill="#bbb"/></svg>
                       </span>
                     </div>
                   </div>
@@ -393,13 +400,13 @@ export default function AIFeaturesPage() {
         )}
 
         {/* Bottom input bar */}
-        <footer className="fixed bottom-0 left-0 sm:left-16 right-0 bg-white dark:bg-[#1C1C1E] border-t border-gray-200 dark:border-gray-700 py-2 sm:py-3 px-3 sm:px-4 flex items-center transition-colors" style={{zIndex: 50}}>
+        <footer className="fixed bottom-0 left-0 sm:left-16 right-0 bg-white dark:bg-[#1C1C1E] border-t border-gray-200 dark:border-gray-700 py-2 sm:py-3 px-2 sm:px-4 flex items-center transition-colors safe-area-inset-bottom" style={{zIndex: 50}}>
           <form className="flex w-full max-w-2xl mx-auto items-end gap-2" onSubmit={handleSend}>
-            <div className="flex-1 flex items-center bg-gray-100 dark:bg-[#2C2C2E] rounded-full border border-gray-200 dark:border-gray-600 px-4 py-2">
+            <div className="flex-1 flex items-center bg-gray-100 dark:bg-[#2C2C2E] rounded-full border border-gray-200 dark:border-gray-600 px-3 sm:px-4 py-2 min-h-[44px]">
               <input
                 type="text"
                 placeholder="Message Chris..."
-                className="flex-1 bg-transparent focus:outline-none text-gray-800 dark:text-gray-100 text-base placeholder-gray-500 dark:placeholder-gray-400"
+                className="flex-1 bg-transparent focus:outline-none text-gray-800 dark:text-gray-100 text-base placeholder-gray-500 dark:placeholder-gray-400 min-h-[24px]"
                 value={input}
                 onChange={e => setInput(e.target.value)}
                 disabled={isLoading || !user}
@@ -407,7 +414,7 @@ export default function AIFeaturesPage() {
                 aria-describedby={error ? "chat-error" : undefined}
               />
               {!input.trim() && (
-                <button type="button" className="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" tabIndex={-1} disabled={isLoading || !user}>
+                <button type="button" className="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors ml-2" tabIndex={-1} disabled={isLoading || !user}>
                   {/* Mic icon */}
                   <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
                     <rect x="9" y="4" width="6" height="12" rx="3" fill="currentColor" className="text-gray-500 dark:text-gray-400"/>
@@ -419,7 +426,7 @@ export default function AIFeaturesPage() {
             {input.trim() && (
               <button 
                 type="submit" 
-                className="w-8 h-8 rounded-full bg-[#007AFF] hover:bg-[#0056CC] disabled:bg-gray-300 dark:disabled:bg-gray-600 flex items-center justify-center transition-colors" 
+                className="w-10 h-10 sm:w-8 sm:h-8 rounded-full bg-[#007AFF] hover:bg-[#0056CC] disabled:bg-gray-300 dark:disabled:bg-gray-600 flex items-center justify-center transition-colors flex-shrink-0" 
                 disabled={isLoading || !input.trim() || !user}
               >
                 {/* Send icon */}
